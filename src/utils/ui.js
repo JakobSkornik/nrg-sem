@@ -89,7 +89,7 @@ export class UI {
       .name("Gravity Force Factor")
     this.gui.add(this.runner.model.param, "speed", 1, 20, 1).name("Speed")
     this.gui.add(this.runner.model.param, "sources", 1, 100, 1).name("Number of source positions")
-    this.gui.add(this.runner.model.param, "isWrapMode").name("Wrap").options([false, true])
+    this.gui.add(this.runner.model.param, "isWrapMode").name("Wrap")
     this.gui.add(this.runner.model.param, "reset").name("Reset Scene")
   }
 
@@ -108,7 +108,7 @@ export class UI {
       .name("Gravity Force Factor")
     this.gui.add(this.runner.model.param, "speed", 1, 20, 1).name("Speed")
     this.gui.add(this.runner.model.param, "sources", 1, 100, 1).name("Number of source positions")
-    this.gui.add(this.runner.model.param, "isWrapMode").name("Wrap").options([false, true])
+    this.gui.add(this.runner.model.param, "isWrapMode").name("Wrap")
     this.gui.add(this.runner.model.param, "reset").name("Reset Scene")
   }
 }
