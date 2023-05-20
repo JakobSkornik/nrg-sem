@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "dev": "webpack serve --mode development --open"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "gl-matrix": "^3.4.3",
+    "lil-gui": "^0.17.0"
+  }
+}
