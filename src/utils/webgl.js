@@ -2,7 +2,18 @@
 
 import * as glMatrix from "gl-matrix"
 
-// Adapted from glslEditor: https://github.com/patriciogonzalezvivo/glslEditor/tree/main
+/*
+ * Adapted from:
+ * - glslEditor: https://github.com/patriciogonzalezvivo/glslEditor/tree/main
+ *   
+ * - WebGL Fundamentals:
+ *        - https://webglfundamentals.org/webgl/lessons/webgl-data-textures.html
+ *        - https://webglfundamentals.org/webgl/lessons/webgl-cube-maps.html
+ *   
+ * - WebGLSamples Texture3D: 
+ *        - https://webglsamples.org/WebGL2Samples/#texture_3d
+ *        - https://github.com/WebGLSamples/WebGL2Samples/blob/master/samples/texture_3d.html
+ */
 
 const CUBE_UV3_MAPPING = [1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0]
 const CUBE_FACES = [
@@ -492,4 +503,3 @@ export class Shader {
     this.gl.useProgram(this.program)
   }
 }
-

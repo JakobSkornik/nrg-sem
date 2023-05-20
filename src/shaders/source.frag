@@ -10,7 +10,6 @@ out vec4 outColor[gl_MaxDrawBuffers];
 uniform sampler3D map;
 uniform float startZ;
 uniform vec3 resolution;
-
 uniform vec3 center;
 uniform float sourceSize;
 

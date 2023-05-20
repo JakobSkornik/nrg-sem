@@ -3,12 +3,12 @@
 import GUI from "lil-gui"
 import { GrayScott3D } from "../models/gray_scott"
 import { FitzHughNagumo3D } from "../models/fitzhugh_nagumo"
-import { Schnakenberg } from "../models/schnakenberg"
+import { Schnakenberg3D } from "../models/schnakenberg"
 
 const Model = {
   GrayScott3D: "Gray-Scott",
   FitzHughNagumo3D: "FitzHugh-Nagumo",
-  Schnakenberg: "Schnakenberg",
+  Schnakenberg3D: "Schnakenberg3D",
 }
 
 export class UI {
@@ -16,7 +16,7 @@ export class UI {
     this.runner = runner
     this.dims = dims
 
-    this.selectedModel = { name: "" }
+    this.selectedModel = { name: "", wrap: false }
     this._setGuiParams(model)
   }
 
@@ -31,6 +31,9 @@ export class UI {
       case Model.FitzHughNagumo3D:
         this.runner.init(FitzHughNagumo3D)
         break
+      case Model.Schnakenberg3D:
+        this.runner.init(Schnakenberg3D)
+        break
     }
   }
 
@@ -44,8 +47,8 @@ export class UI {
         this.selectedModel.name = Model.FitzHughNagumo3D
         this._setFitzHughNagumoParams()
         break
-      case Schnakenberg:
-        this.selectedModel.name = Model.Schnakenberg
+      case Schnakenberg3D:
+        this.selectedModel.name = Model.Schnakenberg3D
         this._setSchnakenbergParams()
         break
     }
@@ -66,6 +69,7 @@ export class UI {
       .name("Gravity Force Factor")
     this.gui.add(this.runner.model.param, "speed", 1, 20, 1).name("Speed")
     this.gui.add(this.runner.model.param, "sources", 1, 100, 1).name("Number of source positions")
+    this.gui.add(this.runner.model.param, "isWrapMode").name("Wrap")
     this.gui.add(this.runner.model.param, "reset").name("Reset Scene")
   }
 
@@ -85,6 +89,7 @@ export class UI {
       .name("Gravity Force Factor")
     this.gui.add(this.runner.model.param, "speed", 1, 20, 1).name("Speed")
     this.gui.add(this.runner.model.param, "sources", 1, 100, 1).name("Number of source positions")
+    this.gui.add(this.runner.model.param, "isWrapMode").name("Wrap").options([false, true])
     this.gui.add(this.runner.model.param, "reset").name("Reset Scene")
   }
 
@@ -103,6 +108,7 @@ export class UI {
       .name("Gravity Force Factor")
     this.gui.add(this.runner.model.param, "speed", 1, 20, 1).name("Speed")
     this.gui.add(this.runner.model.param, "sources", 1, 100, 1).name("Number of source positions")
+    this.gui.add(this.runner.model.param, "isWrapMode").name("Wrap").options([false, true])
     this.gui.add(this.runner.model.param, "reset").name("Reset Scene")
   }
 }

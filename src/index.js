@@ -2,6 +2,5 @@
 
 import { ShaderSim } from "./shader_sim"
 import { GrayScott3D } from "./models/gray_scott"
-import { Schnakenberg } from "./models/schnakenberg"
 
-new ShaderSim(document.getElementById("main"), Schnakenberg)
+new ShaderSim(document.getElementById("main"), GrayScott3D)

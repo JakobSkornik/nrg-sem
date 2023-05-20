@@ -1,8 +1,14 @@
 {
   "scripts": {
-    "dev": "webpack serve --mode development --open"
+    "dev": "parcel index.html",
+    "build": "parcel build index.html",
+    "deploy": "vercel --prod"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@parcel/transformer-glsl": "^2.8.3",
+    "parcel": "^2.0.1",
+    "vercel": "^23.1.2"
+  },
   "dependencies": {
     "gl-matrix": "^3.4.3",
     "lil-gui": "^0.17.0"
