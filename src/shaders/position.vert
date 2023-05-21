@@ -1,5 +1,12 @@
 #version 300 es
 
+/*
+*
+* POSITION MAPPING VERTEX SHADER
+*
+* This shader assigns UV coordinates to vertices.
+*/
+
 in vec3 position;
 in vec2 uv2;
 

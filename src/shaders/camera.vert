@@ -1,5 +1,14 @@
 #version 300 es
 
+/*
+*
+* CAMERA MATRIX VERTEX SHADER
+*
+* This shader calculates camera space position for the vertices and a normal 
+* matrix which is used for transforming normals from model space to camera space.
+*/
+
+
 in vec3 position;
 
 uniform mat4 modelMatrix;

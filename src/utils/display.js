@@ -1,7 +1,7 @@
 "use strict"
 
-import vertexShader from "../shaders/color.vert"
-import fragmentShader from "../shaders/color.frag"
+import vertexShader from "../shaders/camera.vert"
+import fragmentShader from "../shaders/raycast.frag"
 import { Box, Camera, Shader } from "./webgl"
 
 const ROTATION_FACTOR = 0.8

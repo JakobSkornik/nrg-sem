@@ -1,25 +1,30 @@
-'use strict'
+"use strict"
 
-import { UI } from "./utils/ui"
-import { Controls, Display, Renderer } from "./utils"
+import * as Stats from "stats-js"
+import { Controls, Display, Renderer, UI } from "./utils"
 
 const SIZE = 300
-const dims =  { width: SIZE, height: SIZE, depth: SIZE }
+const dims = { width: SIZE, height: SIZE, depth: SIZE }
 
 export class ShaderSim {
-  constructor(canvas, Model) {
+  constructor(canvas, RDModel) {
     this.canvas = canvas
     this._initCanvasDimensions()
     this.renderer = new Renderer(this.canvas)
     this.display = new Display(this.renderer, canvas.width, canvas.height)
     window.addEventListener("resize", this._resize.bind(this))
-    this.init(Model)
+    this.init(RDModel)
   }
 
-  init(Model) {
-    this.model = new Model(this.renderer, dims)
-    this.ui = new UI(this, Model, dims)
+  init(RDModel) {
+    this.model = new RDModel(this.renderer, dims)
+    this.ui = new UI(this, RDModel, dims)
     this.controls = new Controls(this.canvas, this.display, this.model)
+    
+    this.stats = new Stats()
+    this.stats.showPanel(0)
+    document.body.appendChild(this.stats.dom)
+    
     this._loop()
   }
 
@@ -43,9 +48,11 @@ export class ShaderSim {
 
   _loop() {
     requestAnimationFrame(this._loop.bind(this))
+    this.stats.begin()
     this.model.step()
     this.display.updateCamera()
     this.display.setTexture(this.model.source.texture)
     this.display.render()
+    this.stats.end()
   }
 }

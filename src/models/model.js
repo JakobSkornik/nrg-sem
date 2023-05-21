@@ -55,6 +55,10 @@ export class ReactionDiffusionModel {
     this.param.G = val * this.param.G_factor
   }
 
+  togglePause() {
+    this.param.pause = (this.param.pause + 1) % 2
+  }
+
   _addSource() {
     for (let i = 0; i < this.param.sources; i++) {
       this.renderer.set(this.plane, this.sourceShader, {

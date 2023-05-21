@@ -1,7 +1,7 @@
 "use strict"
 
 import simulateShader from "./gray_scott.frag"
-import vertexShader from "../../shaders/vertex.vert"
+import vertexShader from "../../shaders/position.vert"
 import { ReactionDiffusionModel } from "../model"
 
 const INITIAL_SOURCES_NUM = 5
@@ -29,12 +29,13 @@ const grayScottUniforms = {
   G_factor: "float",
   G_pos: "vec3",
   isWrapMode: "int",
+  pause: "int",
 }
 
 export class GrayScott3D extends ReactionDiffusionModel {
   constructor(renderer, size) {
     super(renderer, size, vertexShader, simulateShader, grayScottUniforms)
-    
+
     this.param = {
       r_u: INITIAL_REACTION_RATE,
       r_v: INITIAL_DIFFUSION_RATE,
@@ -49,6 +50,8 @@ export class GrayScott3D extends ReactionDiffusionModel {
       speed: 1,
       isWrapMode: false,
       sourceSize: SOURCE_SIZE,
+      pause: 0,
+      togglePause: () => this.togglePause(),
       reset: () => this.reset(),
     }
     this.reset()
@@ -67,6 +70,7 @@ export class GrayScott3D extends ReactionDiffusionModel {
         G_factor: this.param.G_factor,
         G_pos: this.param.G_pos,
         isWrapMode: this.param.isWrapMode ? 1 : 0,
+        pause: this.param.pause,
       })
       this.source.render()
     }

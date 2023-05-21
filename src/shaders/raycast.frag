@@ -1,5 +1,15 @@
 #version 300 es
 
+/* 
+* 
+* RAYCAST FRAGMENT SHADER
+*
+* This shader raycasts 3D texture, extracts a  color if the ray hits a part of the texture where
+* the green channel value is above a certain threshold, and calculates a surface normal at the 
+* hit position. 
+* 
+*/
+
 precision highp float;
 precision highp sampler3D;
 

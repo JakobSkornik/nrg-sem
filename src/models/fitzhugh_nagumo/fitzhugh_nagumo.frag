@@ -19,6 +19,7 @@ uniform vec3 windDirection;
 uniform float G;
 uniform vec3 gravityPosition;
 uniform int isWrapMode;
+uniform int pause;
 
 vec2 calculateLaplacian(vec3 p) {
     vec3 pix = 1.0 / resolution;
@@ -35,6 +36,10 @@ vec2 calculateLaplacian(vec3 p) {
 }
 
 vec3 externalForces(vec3 p) {
+    if (pause == 1) {
+        return p;
+    }
+
     vec3 displacement = windDirection * w / 1000.0;
     vec3 gravityForce = (gravityPosition - p) * G; // vector from current position to gravity center scaled by gravity strength
     vec3 advectedPosition = isWrapMode == 1 ? fract(p - displacement + gravityForce) : p - displacement + gravityForce;
@@ -42,6 +47,10 @@ vec3 externalForces(vec3 p) {
 }
 
 vec4 fitzhughNagumo3D(vec3 p) {
+    if (pause == 1) {
+        return texture(map, p);
+    }
+    
     vec2 s0 = texture(map, p).xy;
     vec2 lap = calculateLaplacian(p);
     vec2 s;

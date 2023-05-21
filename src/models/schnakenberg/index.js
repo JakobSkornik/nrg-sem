@@ -1,7 +1,7 @@
 "use strict"
 
 import simulateShader from "./schnakenberg.frag"
-import vertexShader from "../../shaders/vertex.vert"
+import vertexShader from "../../shaders/position.vert"
 import { ReactionDiffusionModel } from "../model"
 
 const INITIAL_SOURCES_NUM = 5
@@ -29,6 +29,7 @@ const schnakenbergUniforms = {
   G_factor: "float",
   G_pos: "vec3",
   isWrapMode: "int",
+  pause: "int",
 }
 
 export class Schnakenberg3D extends ReactionDiffusionModel {
@@ -49,6 +50,8 @@ export class Schnakenberg3D extends ReactionDiffusionModel {
       speed: 1,
       isWrapMode: false,
       sourceSize: SOURCE_SIZE,
+      pause: 0,
+      togglePause: () => this.togglePause(),
       reset: () => this.reset(),
     }
     this.reset()
@@ -67,6 +70,7 @@ export class Schnakenberg3D extends ReactionDiffusionModel {
         G_factor: this.param.G_factor,
         G_pos: this.param.G_pos,
         isWrapMode: this.param.isWrapMode ? 1 : 0,
+        pause: this.param.pause,
       })
       this.source.render()
     }

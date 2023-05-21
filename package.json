@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "gl-matrix": "^3.4.3",
-    "lil-gui": "^0.17.0"
+    "lil-gui": "^0.17.0",
+    "stats-js": "^1.0.1"
   }
 }
