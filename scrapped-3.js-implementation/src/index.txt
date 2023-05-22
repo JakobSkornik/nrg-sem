@@ -1,0 +1,124 @@
+import * as THREE from "three"
+import WebGL from "./renderer/WebGL.js"
+import { GUI } from "lil-gui"
+import { ReactionDiffusion3D } from "./math/ReactionDiffusion3D.js"
+import { OrbitControls } from "./controls/OrbitControls.js"
+import { RDFragment, RDVertex } from "./renderer/GLSL.js"
+
+if (WebGL.isWebGL2Available() === false) {
+  document.body.appendChild(WebGL.getWebGL2ErrorMessage())
+}
+
+let renderer, scene, camera, texture, plane, shaderMaterial
+let prevTime = performance.now()
+const size = 80
+
+const parameters = {
+  threshold: 0.2,
+  steps: 50,
+  diffusionRateU: 0.15,
+  diffusionRateV: 0.2,
+  feedRate: 0.04,
+  killRate: 0.06,
+  p: 0.1,
+}
+
+init()
+animate()
+
+function getInitialTexture(size) {
+  const data = new Uint8Array(size * size * size * 4)
+  let i = 0
+  for (let z = 0; z < size; z++) {
+    for (let y = 0; y < size; y++) {
+      for (let x = 0; x < size; x++) {
+        const stride = i * 4
+        data[stride] = 255
+        if (Math.random() < parameters.p) {
+          data[stride + 1] = Math.random() * 255
+        } else {
+          data[stride + 1] = 0
+        }
+        data[stride + 2] = 0
+        data[stride + 3] = 100
+        i++
+      }
+    }
+  }
+
+  const t = new THREE.Data3DTexture(data, size, size, size)
+  t.format = THREE.RGBAFormat
+  t.minFilter = THREE.LinearFilter
+  t.magFilter = THREE.LinearFilter
+  t.unpackAlignment = 1
+  t.needsUpdate = true
+  return t
+}
+
+function init() {
+  renderer = new THREE.WebGLRenderer()
+  renderer.setPixelRatio(window.devicePixelRatio)
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  document.body.appendChild(renderer.domElement)
+
+  scene = new THREE.Scene()
+
+  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100)
+  camera.position.set(0, 0, 2)
+  new OrbitControls(camera, renderer.domElement)
+
+  // Texture
+  texture = getInitialTexture(size)
+
+  // Shader
+  shaderMaterial = new THREE.ShaderMaterial({
+    glslVersion: THREE.GLSL3,
+    vertexShader: RDVertex,
+    fragmentShader: RDFragment,
+    uniforms: {
+      startZ: { value: 0 },
+      resolution: { value: new THREE.Vector3(size, size, size) },
+      map: { value: texture },
+      diffusionRateU: { value: parameters.diffusionRateU },
+      diffusionRateV: {value: parameters.diffusionRateV },
+      f: { value: parameters.feedRate },
+      k: { value: parameters.killRate },
+    },
+    side: THREE.BackSide,
+  })
+
+  // Material
+  plane = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), shaderMaterial)
+  scene.add(plane)
+
+  function update() {}
+
+  const gui = new GUI()
+  gui.add(parameters, "steps", 0, 300, 1).onChange(update)
+  gui.add(parameters, "diffusionRateU", 0, 0.5, 0.0001).onChange(update)
+  gui.add(parameters, "diffusionRateV", 0, 0.5, 0.0001).onChange(update)
+  gui.add(parameters, "feedRate", 0, 0.1, 0.0001).onChange(update)
+  gui.add(parameters, "killRate", 0, 1, 0.0001).onChange(update)
+  gui.add(parameters, "p", 0, 0.5, 0.001).onChange(update)
+
+  const restartButton = {
+    Restart: function () {
+      texture.dispose()
+      texture = getInitialTexture(size)
+    },
+  }
+  gui.add(restartButton, "Restart")
+
+  window.addEventListener("resize", onWindowResize)
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+  renderer.setSize(window.innerWidth, window.innerHeight)
+}
+
+function animate() {
+  requestAnimationFrame(animate)
+  renderer.render(scene, camera)
+}
