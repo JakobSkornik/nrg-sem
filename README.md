@@ -2,4 +2,4 @@
 
 [Live demo ](https://nrg-sem.vercel.app/)
 
-[Report](report/JAKOB_SKORNIK_63160299.pdf.pdf)
+[Report](report/JAKOB_SKORNIK_63160299.pdf)
