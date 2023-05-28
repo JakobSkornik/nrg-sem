@@ -4,10 +4,10 @@ import simulateShader from "./gray_scott.frag"
 import vertexShader from "../../shaders/position.vert"
 import { ReactionDiffusionModel } from "../model"
 
-const INITIAL_SOURCES_NUM = 5
-const INITIAL_REACTION_RATE = 0.15
-const INITIAL_DIFFUSION_RATE = 0.08
-const INITIAL_FEED_RATE = 0.03
+const INITIAL_SOURCES_NUM = 1
+const INITIAL_REACTION_RATE = 0.235
+const INITIAL_DIFFUSION_RATE = 0.145
+const INITIAL_FEED_RATE = 0.0248
 const INITIAL_CONVERSION_RATE = 0.06
 const INITIAL_WIND_FACTOR = 0.0
 const INITIAL_WIND_DIRECTION = [0.7, 0.3, -0.5]

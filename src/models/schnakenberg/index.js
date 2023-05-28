@@ -4,11 +4,11 @@ import simulateShader from "./schnakenberg.frag"
 import vertexShader from "../../shaders/position.vert"
 import { ReactionDiffusionModel } from "../model"
 
-const INITIAL_SOURCES_NUM = 5
+const INITIAL_SOURCES_NUM = 1
 const INITIAL_REACTION_RATE = 0.176
 const INITIAL_DIFFUSION_RATE = 0.08
-const INITIAL_ALPHA = 0.0625
-const INITIAL_BETA = 0.06
+const INITIAL_ALPHA = 0.00625
+const INITIAL_BETA = 0.09
 const INITIAL_WIND_FACTOR = 0.0
 const INITIAL_WIND_DIRECTION = [0.7, 0.3, -0.5]
 const INITIAL_GRAVITY = 0.0
