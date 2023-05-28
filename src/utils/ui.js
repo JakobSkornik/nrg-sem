@@ -68,6 +68,7 @@ export class UI {
     baseFolder.add(this.runner.model.param, "speed", 1, 20, 1).name("Speed (lowers performance)")
     baseFolder.add(this.runner.model.param, "sources", 1, 100, 1).name("Number of Source positions")
     baseFolder.add(this.runner.model.param, "isWrapMode").name("Toggle Wrap")
+    baseFolder.add(this.runner.model.param, "hasColor").name("Toggle Color")
 
     const extFolder = this.gui.addFolder("External Forces")
     extFolder

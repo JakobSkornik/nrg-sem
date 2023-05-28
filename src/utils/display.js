@@ -1,7 +1,7 @@
 "use strict"
 
 import vertexShader from "../shaders/camera.vert"
-import fragmentShader from "../shaders/raycast.frag"
+import raycastShader from "../shaders/raycast.frag"
 import { Box, Camera, Shader } from "./webgl"
 
 const ROTATION_FACTOR = 0.8
@@ -17,6 +17,7 @@ const shaderUniforms = {
   map: "sampler3D",
   size: "vec3",
   raySteps: "float",
+  hasColor: "int",
 }
 
 export class Display {
@@ -24,7 +25,7 @@ export class Display {
     this.renderer = renderer
     this.size = { width, height }
     this.displayCube = new Box(renderer)
-    this.shader = new Shader(renderer, vertexShader, fragmentShader)
+    this.shader = new Shader(renderer, vertexShader, raycastShader)
     this.camera = new Camera()
     this.rotation = { dtheta: 0, dphi: 0, decay: ROTATION_FACTOR }
     this.raySteps = RAY_STEPS
@@ -56,12 +57,12 @@ export class Display {
     this.texture = texture
   }
 
-  render() {
+  render(hasColor) {
     this.renderer.resize(this.size.width, this.size.height)
     this.renderer.set(
       this.displayCube,
       this.shader,
-      { map: this.texture, size: [1, 1, 1], raySteps: this.raySteps },
+      { map: this.texture, size: [1, 1, 1], raySteps: this.raySteps, hasColor: hasColor ? 1 : 0 },
       this.camera,
       true
     )

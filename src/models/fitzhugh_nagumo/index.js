@@ -4,7 +4,7 @@ import simulateShader from "./fitzhugh_nagumo.frag"
 import vertexShader from "../../shaders/position.vert"
 import { ReactionDiffusionModel } from "../model"
 
-const INITIAL_SOURCES_NUM = 1
+const INITIAL_SOURCES_NUM = 99
 const INITIAL_REACTION_RATE = 0.34
 const INITIAL_DIFFUSION_RATE = 0.171
 const INITIAL_EPSILON = 0.107
@@ -51,7 +51,8 @@ export class FitzHughNagumo3D extends ReactionDiffusionModel {
       G_pos: INITIAL_GRAVITY_POS,
       sources: INITIAL_SOURCES_NUM,
       speed: 1,
-      isWrapMode: false,
+      isWrapMode: true,
+      hasColor: false,
       sourceSize: SOURCE_SIZE,
       pause: 0,
       togglePause: () => this.togglePause(),

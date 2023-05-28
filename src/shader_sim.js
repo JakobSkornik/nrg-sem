@@ -52,7 +52,7 @@ export class ShaderSim {
     this.model.step()
     this.display.updateCamera()
     this.display.setTexture(this.model.source.texture)
-    this.display.render()
+    this.display.render(this.model.param.hasColor)
     this.stats.end()
   }
 }
