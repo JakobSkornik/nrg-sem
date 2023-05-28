@@ -4,12 +4,12 @@ import simulateShader from "./fitzhugh_nagumo.frag"
 import vertexShader from "../../shaders/position.vert"
 import { ReactionDiffusionModel } from "../model"
 
-const INITIAL_SOURCES_NUM = 5
-const INITIAL_REACTION_RATE = 0.24
-const INITIAL_DIFFUSION_RATE = 0.168
-const INITIAL_EPSILON = 0.63
-const INITIAL_A = 0.54
-const INITIAL_B = 0.0
+const INITIAL_SOURCES_NUM = 1
+const INITIAL_REACTION_RATE = 0.34
+const INITIAL_DIFFUSION_RATE = 0.171
+const INITIAL_EPSILON = 0.107
+const INITIAL_A = 0.95
+const INITIAL_B = 1.0
 const INITIAL_WIND_FACTOR = 0.0
 const INITIAL_WIND_DIRECTION = [0.7, 0.3, -0.5]
 const INITIAL_GRAVITY = 0.0
