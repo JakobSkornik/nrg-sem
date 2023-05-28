@@ -32,7 +32,7 @@ vec2 calculateLaplacian(vec3 p) {
     vec2 s5 = texture(map, isWrapMode == 1 ? fract(p + vec3(0.0, 0.0, pix.z)) : p + vec3(0.0, 0.0, pix.z)).xy;
     vec2 s6 = texture(map, isWrapMode == 1 ? fract(p - vec3(0.0, 0.0, pix.z)) : p - vec3(0.0, 0.0, pix.z)).xy;
 
-    return (s1 + s2 + s3 + s4 + s5 + s6 - 6.0 * s0) / 2.0 * 2.0;
+    return s1 + s2 + s3 + s4 + s5 + s6 - 6.0 * s0;
 }
 
 vec3 externalForces(vec3 p) {
